@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 public class SecurityServiceImpl  implements SecurityService {
 
 
-    private final UserRepository userRepository;
+    private final UserRepository userRepository;//inject user to use find by username
 
     public SecurityServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // get it from DB and give it to UserDetails
 
         User user = userRepository.findByUserName(username);
 
@@ -28,6 +28,6 @@ public class SecurityServiceImpl  implements SecurityService {
             throw  new UsernameNotFoundException("This user does not exists");
         }
 
-        return new UserPrincipal(user);
+        return new UserPrincipal(user);//if it does find the user return - Spring User. We are using UserPrincipal mapper we created
     }
 }

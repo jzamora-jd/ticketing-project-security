@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class UserPrincipal implements UserDetails {
-
+public class UserPrincipal implements UserDetails { //helps map user credentials from db to springboot security User type
+//extend UserDetails from security.core and implement methods
     private User user;
 
     public UserPrincipal(User user) {

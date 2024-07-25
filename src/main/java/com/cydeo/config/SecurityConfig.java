@@ -48,15 +48,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //used to restrict pages based on role
         return http
                 .authorizeRequests()//dont want login page to be authorized, all users should be able to see Login
-//                .antMatchers("/user/**").hasRole("Admin")
+//                .antMatchers("/user/**").hasRole("Admin") // hasRole is putting ROLE_ prefix
                 .antMatchers("/user/**").hasAuthority("Admin")
                 .antMatchers("/project/**").hasAuthority("Manager")
-                .antMatchers("/task/employee/**").hasAuthority("Employee")
+                .antMatchers("/task/employee/**").hasAuthority("Employee")//hasAuthority not putting any prefix
                 .antMatchers("/task/**").hasAuthority("Manager")
-//                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
+//                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN") //more than one role can access
 //                .antMatchers("task/**").hasAuthority("ROLE_EMPLOYEE")
 
-                .antMatchers(
+                .antMatchers( //let all access login using permitAll()
                        "/",
                        "/login",
                        "/fragments/**",
@@ -66,12 +66,12 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
                 .and()
 //                .httpBasic()
-                .formLogin()
+                .formLogin()//tell spring you want to use the login page
                     .loginPage("/login")
 //                    .defaultSuccessUrl("/welcome")
-                    .successHandler(authSuccessHandler)
-                    .failureUrl("/login?error=true")
-                    .permitAll()
+                    .successHandler(authSuccessHandler) //where you want to land - welcome page
+                    .failureUrl("/login?error=true") // if anything goes wrong
+                    .permitAll() //everyone should have access to this page
                 .and()
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

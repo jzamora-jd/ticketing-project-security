@@ -45,10 +45,9 @@ public class SecurityConfig {
 //    }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //used to restrict pages based on role
         return http
-                .authorizeRequests()
+                .authorizeRequests()//dont want login page to be authorized, all users should be able to see Login
 //                .antMatchers("/user/**").hasRole("Admin")
                 .antMatchers("/user/**").hasAuthority("Admin")
                 .antMatchers("/project/**").hasAuthority("Manager")

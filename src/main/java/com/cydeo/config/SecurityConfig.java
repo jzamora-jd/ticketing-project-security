@@ -69,7 +69,7 @@ public class SecurityConfig {
                 .formLogin()//tell spring you want to use the login page
                     .loginPage("/login")
 //                    .defaultSuccessUrl("/welcome")
-                    .successHandler(authSuccessHandler) //where you want to land - welcome page
+                    .successHandler(authSuccessHandler) //where you want to land - based on user role, mapped in class AuthSuccessHandler
                     .failureUrl("/login?error=true") // if anything goes wrong
                     .permitAll() //everyone should have access to this page
                 .and()//connector
@@ -78,9 +78,9 @@ public class SecurityConfig {
                     .logoutSuccessUrl("/login")
                 .and()
                 .rememberMe()
-                    .tokenValiditySeconds(120)
-                    .key("cydeo")
-                    .userDetailsService(securityService)
+                    .tokenValiditySeconds(120)//120 seconds for session to be active
+                    .key("cydeo")//key can be anything for "rmm me", session is being kept with this key. if you go to application on network tools you can see the JSESSIONID, if this session is deleted it will default to login page
+                    .userDetailsService(securityService)//which user it should remember, injecting securityService since it extends UserDetailsService
                 .and()
                 .build();//needed at the end
 

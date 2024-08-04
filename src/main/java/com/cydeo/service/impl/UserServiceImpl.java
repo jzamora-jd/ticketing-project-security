@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
         dto.setEnabled(true);
 
-        User obj = userMapper.convertToEntity(dto);
+        User obj = userMapper.convertToEntity(dto);//when a password is given by user in UI, it needs to be encrypted and saved in db
         obj.setPassWord(passwordEncoder.encode(obj.getPassWord()));
 
         userRepository.save(obj);

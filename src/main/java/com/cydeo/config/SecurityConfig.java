@@ -49,7 +49,7 @@ public class SecurityConfig {
         return http
                 .authorizeRequests()//dont want login page to be authorized, all users should be able to see Login
 //                .antMatchers("/user/**").hasRole("Admin") // hasRole is putting ROLE_ prefix
-                .antMatchers("/user/**").hasAuthority("Admin")
+                .antMatchers("/user/**").hasAuthority("Admin")//give access to all pages in User page
                 .antMatchers("/project/**").hasAuthority("Manager")
                 .antMatchers("/task/employee/**").hasAuthority("Employee")//hasAuthority not putting any prefix
                 .antMatchers("/task/**").hasAuthority("Manager")
@@ -62,7 +62,7 @@ public class SecurityConfig {
                        "/fragments/**",
                        "/assets/**",
                        "/images/**"
-                ).permitAll()
+                ).permitAll() //all users should have access to login page
                 .anyRequest().authenticated()
                 .and()
 //                .httpBasic()
@@ -72,16 +72,17 @@ public class SecurityConfig {
                     .successHandler(authSuccessHandler) //where you want to land - welcome page
                     .failureUrl("/login?error=true") // if anything goes wrong
                     .permitAll() //everyone should have access to this page
-                .and()
-                .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .and()//connector
+                .logout()//
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//looking for thymleaf page to log out
                     .logoutSuccessUrl("/login")
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds(120)
                     .key("cydeo")
                     .userDetailsService(securityService)
-                .and().build();
+                .and()
+                .build();//needed at the end
 
     }
 

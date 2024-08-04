@@ -32,13 +32,13 @@ public class UserPrincipal implements UserDetails { //helps map user credentials
     @Override
     public String getPassword() {
 
-        return this.user.getPassWord();
+        return this.user.getPassWord();//gets password and assigns to Spring's User
     }
 
     @Override
     public String getUsername() {
 
-        return this.user.getUserName();
+        return this.user.getUserName();//same here - assigning to Spring User
     }
 
     @Override

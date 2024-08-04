@@ -22,6 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
                         <li class="nav-divider"></li>
+<!--                        adding authentication for which pages can be seen by which role-->
                         <li class="nav-item" sec:authorize="hasAnyAuthority('Admin','Manager')">
                             <a class="nav-link active"
                                href="#"

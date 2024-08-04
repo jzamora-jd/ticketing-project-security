@@ -102,7 +102,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> listAllProjectDetails() {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();//get username from security holder then search projects based on username
 
         UserDTO currentUserDTO = userService.findByUserName(username);
 

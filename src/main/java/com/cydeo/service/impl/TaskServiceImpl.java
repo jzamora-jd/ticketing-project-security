@@ -112,7 +112,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();//get username from security holder, for the user that just logged in.
 
         User loggedInUser = userRepository.findByUserName(username);
 

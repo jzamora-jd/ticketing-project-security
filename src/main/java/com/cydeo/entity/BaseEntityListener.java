@@ -12,7 +12,7 @@ import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @Component
-public class BaseEntityListener extends AuditingEntityListener {
+public class BaseEntityListener extends AuditingEntityListener {//created for the purpose of setting timestamp based on security holder
 
     @PrePersist
     public void onPrePersist(BaseEntity baseEntity){

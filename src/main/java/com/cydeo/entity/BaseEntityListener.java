@@ -37,7 +37,7 @@ public class BaseEntityListener extends AuditingEntityListener {//created for th
     @PreUpdate
     public void onPreUpdate(BaseEntity baseEntity){
 
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //getting authentication from Security context rather than hard coding
 
         baseEntity.lastUpdateDateTime = LocalDateTime.now();
 //        baseEntity.lastUpdateUserId = 1L;
